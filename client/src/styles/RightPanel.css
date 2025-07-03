@@ -1,0 +1,28 @@
+.rightPanel {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.resultsPlaceholder {
+    height: 5.0625rem;
+}
+
+.checkReveal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.checkReveal button {
+    padding: 0.625rem, 0.5rem;
+}
+
+.check {
+    margin-right: 0.5rem;    
+}
+
+.reveal {
+    margin-left: 0.5rem;    
+}
