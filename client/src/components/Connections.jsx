@@ -24,8 +24,8 @@ export default function Connections(props) {
                             // Align paths with box centers
                             // 12px difference between box and svg origins
                             point => `
-                                ${rootFontSize * (point[0] * (props.width + props.margin) + props.x_offset + 1.75)}
-                                ${rootFontSize * (point[1] * (props.height + props.margin) + props.y_offset + 3.375)}
+                                ${rootFontSize * (point[0] * (props.width + props.margin) + props.offsetX + 1.75)}
+                                ${rootFontSize * (point[1] * (props.height + props.margin) + props.offsetY + 3.375)}
                             `
                         ).join(" L ")}
                     />

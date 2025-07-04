@@ -13,8 +13,8 @@ export default function Puzzle(props) {
     const WIDTH = 3.5
     const HEIGHT = 6.625
     const MARGIN = 2
-    const X_OFFSET = WIDTH + MARGIN
-    const Y_OFFSET = (HEIGHT + WIDTH) / 2 + MARGIN
+    const OFFSET_X = WIDTH + MARGIN
+    const OFFSET_Y = (HEIGHT + WIDTH) / 2 + MARGIN
     const numBoxes = props.puzzle.puzzle.boxes.length
 
     // Set puzzle bounding box dimensions based on puzzle size
@@ -63,17 +63,18 @@ export default function Puzzle(props) {
                 props.puzzle.puzzle.boxes.map((box, i) =>
                     <Fragment key={props.keys[i]}>
                         <Box
-                            top_val={box.top_val}
-                            bottom_val={box.bottom_val}
+                            topVal={box.topVal}
+                            bottomVal={box.bottomVal}
                             x={box.x}
                             y={box.y}
                             width={WIDTH}
                             height={HEIGHT}
                             margin={MARGIN}
-                            x_offset={X_OFFSET}
-                            y_offset={Y_OFFSET}
+                            offsetX={OFFSET_X}
+                            offsetY={OFFSET_Y}
                             onChange={handleBoxChange}
                             isSolved={props.isSolved}
+                            boxStates={props.boxStates}
                         />
                         <Notes
                             x={box.x}
@@ -81,8 +82,8 @@ export default function Puzzle(props) {
                             width={WIDTH}
                             height={HEIGHT}
                             margin={MARGIN}
-                            x_offset={X_OFFSET - 0.5}
-                            y_offset={Y_OFFSET - 0.5}
+                            offsetX={OFFSET_X - 0.5}
+                            offsetY={OFFSET_Y - 0.5}
                             isSolved={props.isSolved}
                         />
                     </Fragment>
@@ -93,8 +94,8 @@ export default function Puzzle(props) {
                 width={WIDTH}
                 height={HEIGHT}
                 margin={MARGIN}
-                x_offset={X_OFFSET}
-                y_offset={Y_OFFSET}
+                offsetX={OFFSET_X}
+                offsetY={OFFSET_Y}
             />
         </div>
     )

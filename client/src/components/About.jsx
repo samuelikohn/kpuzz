@@ -3,36 +3,20 @@ import "../styles/Overlay.css"
 
 export default function About(props) {
 
-    function handleBackdropClick() {
-        props.onClose()
-    }
-
-    function handleContentClick(event) {
-        event.stopPropagation()
-    }
-
     function openWebsite() {
         // window.open(TODO, "_blank").focus()
-    }
-
-    function openGithub() {
-        window.open("https://github.com/samuelikohn", "_blank").focus()
     }
 
     function openBlog() {
         // window.open(TODO, "_blank").focus()
     }
 
-    function openSource() {
-        window.open("https://github.com/samuelikohn/K-Puzz", "_blank").focus()
-    }
-
     return (
-        <div className="overlayBackdrop" onClick={handleBackdropClick}>
+        <div className="overlayBackdrop" onClick={props.onClose}>
             <ScrollArea.Root className="scrollArea">
                 <ScrollArea.Viewport className="viewport">
                     <ScrollArea.Content>
-                        <div className="overlay about" onClick={handleContentClick}>
+                        <div className="overlay about" onClick={(event) => event.stopPropagation()}>
                             <h2>About</h2>
                             <div className="controlBox">
                                 <p>
@@ -58,9 +42,9 @@ export default function About(props) {
                             </div>
                             <div className="links">
                                 <button onClick={openWebsite}>Website</button>
-                                <button onClick={openGithub}>GitHub</button>
+                                <button onClick={() => window.open("https://github.com/samuelikohn", "_blank").focus()}>GitHub</button>
                                 <button onClick={openBlog}>Blog</button>
-                                <button onClick={openSource}>Source</button>
+                                <button onClick={() => window.open("https://github.com/samuelikohn/K-Puzz", "_blank").focus()}>Source</button>
                             </div>
                             <br/>
                             <br/>

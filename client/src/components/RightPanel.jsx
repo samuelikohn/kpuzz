@@ -36,7 +36,7 @@ export default function RightPanel(props) {
                 <button onClick={() => setAboutPageShown(true)}>About</button>
             </div>
             {checkSelectShown && <CheckSelect onClose={() => setCheckSelectShown(false)} cursorPos={cursorPos}/>}
-            {revealSelectShown && <RevealSelect onClose={() => setRevealSelectShown(false)} cursorPos={cursorPos}/>}
+            {revealSelectShown && <RevealSelect onClose={() => setRevealSelectShown(false)} cursorPos={cursorPos} revealAllBoxes={props.revealAllBoxes}/>}
             {howToPlayPageShown && <HowToPlay onClose={() => setHowToPlayPageShown(false)}/>}
             {aboutPageShown && <About onClose={() => setAboutPageShown(false)}/>}
         </>

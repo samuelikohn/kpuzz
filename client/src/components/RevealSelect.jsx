@@ -6,10 +6,6 @@ export default function RevealSelect(props) {
         console.log("box revealed")
     }
 
-    function revealPuzzle() {
-        console.log("puzzle revealed")
-    }
-
     const selectStyle = props.cursorPos ? {
         left: props.cursorPos[0],
         top: props.cursorPos[1]
@@ -19,7 +15,7 @@ export default function RevealSelect(props) {
         <div className="selectBackdrop" onClick={props.onClose}>
             <div className="select" style={selectStyle}>
                 <p className="boxSelect" onClick={revealBox}>Box</p>
-                <p className="puzzleSelect" onClick={revealPuzzle}>Puzzle</p>
+                <p className="puzzleSelect" onClick={props.revealAllBoxes}>Puzzle</p>
             </div>
         </div>
     )

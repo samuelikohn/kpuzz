@@ -15,8 +15,8 @@ export function generatePuzzle(width, height) {
                 }
                 box.connections.push([newX, newY])
                 newBox.connections.push([box.x, box.y])
-                box.top_val += newBox.bottom_val
-                newBox.top_val += box.bottom_val
+                box.topVal += newBox.bottomVal
+                newBox.topVal += box.bottomVal
 
                 return true
             }
@@ -72,8 +72,8 @@ export function generatePuzzle(width, height) {
                 boxes.push({
                     x: i,
                     y: j,
-                    top_val: 0,
-                    bottom_val: 0,
+                    topVal: 0,
+                    bottomVal: 0,
                     connections: []
                 })
                 blocked.push([i, j])
@@ -82,11 +82,11 @@ export function generatePuzzle(width, height) {
     }
 
     // Box vals are ints from 1 to number of boxes
-    const bottom_vals = shuffle([...Array(boxes.length).keys()])
+    const bottomVals = shuffle([...Array(boxes.length).keys()])
 
     // Assign shuffled vals to boxes
     for (let i = 0; i < boxes.length; i++) {
-        boxes[i].bottom_val = bottom_vals[i] + 1
+        boxes[i].bottomVal = bottomVals[i] + 1
     }
 
     // X% chance to connect to boxes Y units away
@@ -99,7 +99,7 @@ export function generatePuzzle(width, height) {
         }
     }
 
-    // else delete (boxes, blocked, connections, box connections, swap and subtract vals)
+    // Do another pass to connect isolated boxes
     const flatDirs = dirs.flat()
     for (const box of boxes) {
         if (box.connections.length === 0) {

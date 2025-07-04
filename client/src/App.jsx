@@ -15,6 +15,7 @@ export default function App() {
     const [startTime, setStartTime] = useState(Date.now())
 	const [isSolved, setIsSolved] = useState(false)
     const [resultsShown, setResultsShown] = useState(false)
+	const [boxStates, setBoxStates] = useState(null)
 
 	function anyIsolatedBoxes(puzzle) {
 		for (const box of puzzle.boxes) {
@@ -32,7 +33,7 @@ export default function App() {
 			for (const connection of box.connections) {
 				for (const box2 of puzzle.boxes) {
 					if (box2.x === connection[0] && box2.y === connection[1]) {
-						boxEquation[box2.bottom_val - 1] = 1
+						boxEquation[box2.bottomVal - 1] = 1
 						break
 					}
 				}
@@ -43,6 +44,7 @@ export default function App() {
 	}
 
 	function generateNewPuzzle(data) {
+		setBoxStates(null)
 		setPuzzleData(data)
 		setIsSolved(false)
 	}
@@ -56,6 +58,19 @@ export default function App() {
 				[boxID]: currentValue
 			}))
 		}
+	}
+
+	function revealAllBoxes() {
+		setBoxStates(prevBoxStates => {
+			for (const boxState of Object.keys(prevBoxStates)) {
+				prevBoxStates[boxState] = {
+					checkedCorrect: false,
+					checkedIncorrect: false,
+					revealed: true
+				}
+			}
+			return prevBoxStates
+		})
 	}
 
 	function writeToDB(newID, newPuzzle, width, height) {
@@ -114,6 +129,21 @@ export default function App() {
 		getPuzzleByID(puzzleData.id)
     }, [puzzleData])
 
+	// Once puzzle is retrieved, set box states
+	useEffect(() => {
+		if (currPuzzle) {
+			const allStates = {}
+			for (const box of currPuzzle.puzzle.boxes) {
+				allStates[box.bottomVal] = {
+					checkedCorrect: false,
+					checkedIncorrect: false,
+					revealed: false
+				}
+			}
+			setBoxStates(allStates)
+		}
+	}, [currPuzzle])
+
 	return (
 		<div className="app">
 			<LeftPanel
@@ -131,6 +161,7 @@ export default function App() {
 					setResultsShown={setResultsShown}
 					isSolved={isSolved}
 					setIsSolved={setIsSolved}
+					boxStates={boxStates}
 				/>
 			}
 			<RightPanel
@@ -138,6 +169,7 @@ export default function App() {
 				numbersUsed={Object.values(numbersUsed)}
 				isSolved={isSolved}
 				setResultsShown={setResultsShown}
+				revealAllBoxes={revealAllBoxes}
 			/>
 		</div>
 	)
